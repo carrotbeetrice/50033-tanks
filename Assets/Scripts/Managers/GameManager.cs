@@ -12,12 +12,13 @@ public class GameManager : MonoBehaviour
     public float m_StartDelay = 3f;             
     public float m_EndDelay = 3f;               
     public CameraControl m_CameraControl;       
-    public Text m_MessageText;                  
+    public Text m_MessageText;
+    public Text[] m_TankScores;               
     public GameObject[] m_TankPrefabs;
-    public TankManager[] m_Tanks;               
+    public TankManager[] m_Tanks;       
     public List<Transform> wayPointsForAI;
 
-    private int m_RoundNumber;                  
+    private int m_RoundNumber;
     private WaitForSeconds m_StartWait;         
     private WaitForSeconds m_EndWait;           
     private TankManager m_RoundWinner;          
@@ -70,8 +71,14 @@ public class GameManager : MonoBehaviour
         yield return StartCoroutine(RoundPlaying());
         yield return StartCoroutine(RoundEnding());
 
-        if (m_GameWinner != null) SceneManager.LoadScene(0);
-        else StartCoroutine(GameLoop());
+        if (m_GameWinner != null) 
+        {
+            SceneManager.LoadScene(0);
+        }
+        else
+        {
+            StartCoroutine(GameLoop());
+        }
     }
 
 
@@ -106,7 +113,10 @@ public class GameManager : MonoBehaviour
         m_RoundWinner = null;
 
         m_RoundWinner = GetRoundWinner();
-        if (m_RoundWinner != null) m_RoundWinner.m_Wins++;
+        if (m_RoundWinner != null) {
+            m_RoundWinner.m_Wins++;
+            m_TankScores[m_RoundWinner.m_PlayerNumber - 1].text = m_RoundWinner.m_Wins.ToString();
+        }
 
         m_GameWinner = GetGameWinner();
 

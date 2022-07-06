@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class TankHealth : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class TankHealth : MonoBehaviour
     public Color m_FullHealthColor = Color.green;  
     public Color m_ZeroHealthColor = Color.red;    
     public GameObject m_ExplosionPrefab;
+    public UnityEvent m_OnPlayerDamage;
     
     private AudioSource m_ExplosionAudio;          
     private ParticleSystem m_ExplosionParticles;   
@@ -40,6 +42,7 @@ public class TankHealth : MonoBehaviour
 
         SetHealthUI();
         if (m_CurrentHealth <= 0f && !m_Dead) OnDeath();
+        else m_OnPlayerDamage.Invoke();
     }
 
 
