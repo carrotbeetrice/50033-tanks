@@ -3,6 +3,8 @@
 [CreateAssetMenu(menuName = "PluggableAI/Decisions/Look")]
 public class LookDecision : Decision
 {
+    public CustomChaseEvent onChaseStart;
+    public CustomChaseEvent onChaseEnd;
 
     public override bool Decide(StateController controller)
     {
@@ -23,10 +25,12 @@ public class LookDecision : Decision
         if (Physics.SphereCast(position, radius, direction, out hit, lookRange) && hit.collider.CompareTag("Player"))
         {
 			controller.chaseTarget = hit.transform;
+            onChaseStart.Invoke(controller.tankPlayerNumber);
 			return true;
         }
 		else
 		{
+            onChaseEnd.Invoke(controller.tankPlayerNumber);
 			return false;
 		}
     }

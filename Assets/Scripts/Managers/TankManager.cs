@@ -23,6 +23,7 @@ public class TankManager
     {
         m_StateController = m_Instance.GetComponent<StateController>();
         m_StateController.SetupAI(true, wayPointList);
+        m_StateController.tankPlayerNumber = m_PlayerNumber;
 
         m_Shooting = m_Instance.GetComponent<TankShooting>();
         m_Shooting.m_PlayerNumber = m_PlayerNumber;
@@ -82,6 +83,7 @@ public class TankManager
         m_Instance.SetActive(true);
 
         if (m_PlayerNumber == 1) m_Movement.ResetSpeed();
+        // else m_StateController.speed += m_StateController.enemyStats.speedIncrement;
     }
 
 }

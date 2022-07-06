@@ -16,6 +16,7 @@ public class StateController : MonoBehaviour {
 	[HideInInspector] public int nextWayPoint;
 	[HideInInspector] public Transform chaseTarget;
 	[HideInInspector] public float stateTimeElapsed;
+	[HideInInspector] public int tankPlayerNumber;
 
 	private bool aiActive;
 

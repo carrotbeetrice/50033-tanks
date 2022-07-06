@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu (menuName = "PluggableAI/EnemyStats")]
 public class EnemyStats : ScriptableObject {
 
-	public float moveSpeed = 1;
+	public float moveSpeed = 12;
 	public float lookRange = 40f;
 	public float lookSphereCastRadius = 1f;
 
