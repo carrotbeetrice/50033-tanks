@@ -92,6 +92,13 @@ public class TankMovement : MonoBehaviour
             direction = -direction.normalized;
             m_Rigidbody.AddForce(direction * 5);
         }
+        else if (other.gameObject.CompareTag("Rocks"))
+        {
+            m_Rigidbody.AddExplosionForce(500f, transform.position, 5f);
+            var health = m_Rigidbody.GetComponent<TankHealth>();
+            if (health == null) return;
+            health.TakeDamage(50f); // should be a constant somewhere
+        }
     }
 
     private void Move()
